@@ -68,21 +68,36 @@ stages:
 
     - script: |
 
+        echo "Cleaning old GitOps directory"
+
+        rm -rf gitops-repo
+
+
+        echo "Cloning GitOps repository"
+
         git clone https://$(GITHUB_PAT)@github.com/nishadZC/gitops-repo.git
 
+
         cd gitops-repo/app1
+
+
+        echo "Updating image tag"
 
         sed -i "s|image:.*|image: $(containerRegistry)/$(imageRepository):$(Build.BuildId)|" deployment.yml
 
 
         git config user.email "azurepipeline@gmail.com"
+
         git config user.name "Azure Pipeline"
+
 
         git add deployment.yml
 
 
         git commit -m "Update image $(Build.BuildId)"
 
+
         git push origin main
+
 
       displayName: Update GitOps Repository
