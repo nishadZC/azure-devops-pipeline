@@ -1,7 +1,3 @@
-# Deploy to Azure Kubernetes Service
-# Build and push image to Azure Container Registry; Deploy to Azure Kubernetes Service
-# https://docs.microsoft.com/azure/devops/pipelines/languages/docker
-
 trigger:
 - main
 
@@ -9,30 +5,31 @@ resources:
 - repo: self
 
 variables:
-
-  # Container registry service connection established during pipeline creation
   dockerRegistryServiceConnection: '4ca1b796-fefa-4a30-bdb2-151c27da6be6'
   imageRepository: 'app1nginxaks'
   containerRegistry: 'akscontaineregistrydemo.azurecr.io'
   dockerfilePath: '**/Dockerfile'
   tag: '$(Build.BuildId)'
-  imagePullSecret: 'akscontaineregistrydemo759271e0-auth'
-
-  # Agent VM image name
   vmImageName: 'ubuntu-latest'
-
 
 stages:
 - stage: Build
-  displayName: Build stage
+  displayName: Build and Push
   jobs:
   - job: Build
-    displayName: Build
+    displayName: Build Docker Image
     pool:
       vmImage: $(vmImageName)
+
     steps:
+
+    # Checkout repository with credentials
+    - checkout: self
+      persistCredentials: true
+
+    # Build and Push Image to ACR
     - task: Docker@2
-      displayName: Build and push an image to container registry
+      displayName: Build and Push Image
       inputs:
         command: buildAndPush
         repository: $(imageRepository)
@@ -41,39 +38,24 @@ stages:
         tags: |
           $(tag)
 
-    - upload: manifests
-      artifact: manifests
+    # Update deployment.yml with latest image tag
+    - script: |
+        echo "Updating deployment.yml..."
 
-# - stage: Deploy
-#   displayName: Deploy stage
-#   dependsOn: Build
+        sed -i "s|image: .*|image: $(containerRegistry)/$(imageRepository):$(tag)|" manifests/deployment.yml
 
-#   jobs:
-#   - deployment: Deploy
-#     displayName: Deploy
-#     pool:
-#       vmImage: $(vmImageName)
-#     environment: 'nishadZCazuredevopspipeline-1754.default'
-#     strategy:
-#       runOnce:
-#         deploy:
-#           steps:
-#           - task: KubernetesManifest@0
-#             displayName: Create imagePullSecret
-#             inputs:
-#               action: createSecret
-#               secretName: $(imagePullSecret)
-#               dockerRegistryEndpoint: $(dockerRegistryServiceConnection)
+        echo "Updated deployment.yml"
+        cat manifests/deployment.yml
+      displayName: Update deployment manifest
 
-#           - task: KubernetesManifest@0
-#             displayName: Deploy to Kubernetes cluster
-#             inputs:
-#               action: deploy
-#               manifests: |
-#                 $(Pipeline.Workspace)/manifests/deployment.yml
-#                 $(Pipeline.Workspace)/manifests/service.yml
-#               imagePullSecrets: |
-#                 $(imagePullSecret)
-#               containers: |
-#                 $(containerRegistry)/$(imageRepository):$(tag)
+    # Commit and Push updated deployment.yml
+    - script: |
+        git config user.email "azuredevops@local"
+        git config user.name "Azure DevOps"
 
+        git add manifests/deployment.yml
+
+        git commit -m "Update image tag to $(tag)" || echo "No changes to commit"
+
+        git push origin HEAD:main
+      displayName: Commit and Push manifest changes
