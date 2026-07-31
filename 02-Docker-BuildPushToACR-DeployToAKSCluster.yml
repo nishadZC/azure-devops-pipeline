@@ -66,31 +66,23 @@ stages:
 
 
 
-    # Clone GitOps Repository and Update Manifest
-
     - script: |
 
-        git clone https://vinayaknishad@dev.azure.com/vinayaknishad/azure-devops-pipeline/_git/azure-devops-pipeline
-
+        git clone https://$(GITHUB_PAT)@github.com/nishadZC/gitops-repo.git
 
         cd gitops-repo/app1
 
+        sed -i "s|image:.*|image: $(containerRegistry)/$(imageRepository):$(Build.BuildId)|" deployment.yml
 
-        sed -i "s|image:.*|image: $(containerRegistry)/$(imageRepository):$(tag)|" deployment.yml
 
-
-        git config user.email "azuredevops@local"
-
-        git config user.name "Azure DevOps"
-
+        git config user.email "azurepipeline@gmail.com"
+        git config user.name "Azure Pipeline"
 
         git add deployment.yml
 
 
-        git commit -m "Update image tag to $(tag)"
-
+        git commit -m "Update image $(Build.BuildId)"
 
         git push origin main
 
-
-      displayName: Update GitOps Repository
+    displayName: Update GitOps Repository
