@@ -1,22 +1,38 @@
 apiVersion: argoproj.io/v1alpha1
+
 kind: Application
+
 metadata:
   name: app1
+
   namespace: argocd
 
 spec:
+
   project: default
 
   source:
-    repoURL: https://github.com/nishadZC/azure-devops-pipeline.git
+
+    repoURL: https://vinayaknishad@dev.azure.com/vinayaknishad/azure-devops-pipeline/_git/azure-devops-pipeline
+
     targetRevision: main
-    path: manifests
+
+    path: app1
 
   destination:
+
     server: https://kubernetes.default.svc
-    namespace: default
+
+    namespace: app1
 
   syncPolicy:
+
     automated:
+
       prune: true
+
       selfHeal: true
+
+    syncOptions:
+
+    - CreateNamespace=true

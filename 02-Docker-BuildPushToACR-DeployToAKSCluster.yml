@@ -4,58 +4,93 @@ trigger:
 resources:
 - repo: self
 
+
 variables:
+
   dockerRegistryServiceConnection: '4ca1b796-fefa-4a30-bdb2-151c27da6be6'
+
   imageRepository: 'app1nginxaks'
+
   containerRegistry: 'akscontaineregistrydemo.azurecr.io'
+
   dockerfilePath: '**/Dockerfile'
+
   tag: '$(Build.BuildId)'
+
   vmImageName: 'ubuntu-latest'
 
+
 stages:
+
 - stage: Build
+
   displayName: Build and Push
+
   jobs:
+
   - job: Build
+
     displayName: Build Docker Image
+
     pool:
+
       vmImage: $(vmImageName)
+
 
     steps:
 
-    # Checkout repository with credentials
+
+    # Checkout Application Repository
     - checkout: self
       persistCredentials: true
 
+
     # Build and Push Image to ACR
+
     - task: Docker@2
+
       displayName: Build and Push Image
+
       inputs:
+
         command: buildAndPush
+
         repository: $(imageRepository)
+
         dockerfile: $(dockerfilePath)
+
         containerRegistry: $(dockerRegistryServiceConnection)
+
         tags: |
           $(tag)
 
-    # Update deployment.yml with latest image tag
+
+
+    # Clone GitOps Repository and Update Manifest
+
     - script: |
-        echo "Updating deployment.yml..."
 
-        sed -i "s|image: .*|image: $(containerRegistry)/$(imageRepository):$(tag)|" manifests/deployment.yml
+        git clone https://vinayaknishad@dev.azure.com/vinayaknishad/azure-devops-pipeline/_git/azure-devops-pipeline
 
-        echo "Updated deployment.yml"
-        cat manifests/deployment.yml
-      displayName: Update deployment manifest
 
-    # Commit and Push updated deployment.yml
-    - script: |
+        cd gitops-repo/app1
+
+
+        sed -i "s|image:.*|image: $(containerRegistry)/$(imageRepository):$(tag)|" deployment.yml
+
+
         git config user.email "azuredevops@local"
+
         git config user.name "Azure DevOps"
 
-        git add manifests/deployment.yml
 
-        git commit -m "Update image tag to $(tag)" || echo "No changes to commit"
+        git add deployment.yml
 
-        git push origin HEAD:main
-      displayName: Commit and Push manifest changes
+
+        git commit -m "Update image tag to $(tag)"
+
+
+        git push origin main
+
+
+      displayName: Update GitOps Repository
