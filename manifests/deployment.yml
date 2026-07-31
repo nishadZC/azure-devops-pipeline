@@ -14,6 +14,6 @@ spec:
     spec:
       containers:
         - name: app1nginxaks 
-          image: akscontaineregistrydemo.azurecr.io/app1nginxaks:69
+          image: akscontaineregistrydemo.azurecr.io/app1nginxaks:70
           ports:
           - containerPort: 80
