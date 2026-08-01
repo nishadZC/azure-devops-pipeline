@@ -2,63 +2,53 @@ trigger:
 - main
 
 variables:
-
 - name: dockerRegistryServiceConnection
   value: '4ca1b796-fefa-4a30-bdb2-151c27da6be6'
 
 - name: imageRepository
-  value: 'app1nginxaks'
+  value: app1nginxaks
 
 - name: containerRegistry
-  value: 'akscontaineregistrydemo.azurecr.io'
+  value: akscontaineregistrydemo.azurecr.io
 
 - name: dockerfilePath
   value: '**/Dockerfile'
 
 - name: tag
-  value: '$(Build.SourceVersion)'
+  value: $(Build.BuildId)
 
-- name: vmImageName
-  value: 'ubuntu-latest'
+pool:
+  vmImage: ubuntu-latest
 
-stages:
+steps:
 
-- stage: Build
+- checkout: self
 
-  displayName: Build and Push
+- task: Docker@2
+  displayName: Build and Push Image
+  inputs:
+    command: buildAndPush
+    repository: $(imageRepository)
+    dockerfile: $(dockerfilePath)
+    containerRegistry: $(dockerRegistryServiceConnection)
+    tags: |
+      $(tag)
 
-  jobs:
+# Trigger GitOps Pipeline
+- bash: |
 
-  - job: Build
+    echo "Triggering GitOps Pipeline..."
 
-    displayName: Build Docker Image
+    curl -X POST \
+      -u :$(System.AccessToken) \
+      -H "Content-Type: application/json" \
+      -d '{
+        "templateParameters": {
+          "imageTag": "$(Build.BuildId)"
+        }
+      }' \
+      https://dev.azure.com/vinayaknishad/azure-devops-pipeline/_apis/pipelines/14/runs?api-version=7.1-preview.1
 
-    pool:
-
-      vmImage: $(vmImageName)
-
-    steps:
-
-    # Checkout Application Repository
-    - checkout: self
-      persistCredentials: true
-
-
-    # Build and Push Image to ACR
-
-    - task: Docker@2
-
-      displayName: Build and Push Image
-
-      inputs:
-
-        command: buildAndPush
-
-        repository: $(imageRepository)
-
-        dockerfile: $(dockerfilePath)
-
-        containerRegistry: $(dockerRegistryServiceConnection)
-
-        tags: |
-          $(tag)
+  displayName: Trigger GitOps Pipeline
+  env:
+    SYSTEM_ACCESSTOKEN: $(System.AccessToken)
