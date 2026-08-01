@@ -6,19 +6,32 @@ resources:
 
 
 variables:
+- group: GitHub-Secrets
 
-  dockerRegistryServiceConnection: '4ca1b796-fefa-4a30-bdb2-151c27da6be6'
+- name: dockerRegistryServiceConnection
+  value: '4ca1b796-fefa-4a30-bdb2-151c27da6be6'
 
-  imageRepository: 'app1nginxaks'
+- name: imageRepository
+  value: 'app1nginxaks'
 
-  containerRegistry: 'akscontaineregistrydemo.azurecr.io'
+- name: containerRegistry
+  value: 'akscontaineregistrydemo.azurecr.io'
 
-  dockerfilePath: '**/Dockerfile'
+- name: dockerfilePath
+  value: '**/Dockerfile'
 
-  tag: '$(Build.BuildId)'
+- name: tag
+  value: '$(Build.SourceVersion)'
 
-  vmImageName: 'ubuntu-latest'
+- name: vmImageName
+  value: 'ubuntu-latest'
 
+- script: |
+    sudo wget https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64 \
+      -O /usr/local/bin/yq
+    sudo chmod +x /usr/local/bin/yq
+    yq --version
+  displayName: Install yq
 
 stages:
 
@@ -67,37 +80,29 @@ stages:
 
 
     - script: |
-
-        echo "Cleaning old GitOps directory"
+        set -e
 
         rm -rf gitops-repo
 
-
-        echo "Cloning GitOps repository"
-
         git clone https://$(GITHUB_PAT)@github.com/nishadZC/gitops-repo.git
-
 
         cd gitops-repo/app1
 
+        yq -i '
+        .spec.template.spec.containers[0].image =
+        "$(containerRegistry)/$(imageRepository):$(Build.SourceVersion)"
+        ' deployment.yml
 
-        echo "Updating image tag"
-
-        sed -i "s|image:.*|image: $(containerRegistry)/$(imageRepository):$(Build.BuildId)|" deployment.yml
-
+        echo "Updated image:"
+        yq '.spec.template.spec.containers[0].image' deployment.yml
 
         git config user.email "azurepipeline@gmail.com"
-
         git config user.name "Azure Pipeline"
-
 
         git add deployment.yml
 
-
-        git commit -m "Update image $(Build.BuildId)"
-
+        git diff --cached --quiet || \
+        git commit -m "Deploy $(Build.SourceVersion)"
 
         git push origin main
-
-
       displayName: Update GitOps Repository
