@@ -6,7 +6,6 @@ resources:
 
 
 variables:
-- group: GitHub-Secrets
 
 - name: dockerRegistryServiceConnection
   value: '4ca1b796-fefa-4a30-bdb2-151c27da6be6'
@@ -84,8 +83,7 @@ stages:
 
         rm -rf gitops-repo
 
-        git -c http.extraHeader="Authorization: Bearer $(GITHUB_PAT)" \
-        clone https://github.com/nishadZC/gitops-repo.git
+        git clone https://$(GITHUB_PAT)@github.com/nishadZC/gitops-repo.git
 
         cd gitops-repo/app1
 
