@@ -108,6 +108,4 @@ stages:
             git commit -m "Deploy $(tag)"
             git push origin main
         fi
-
-        git push origin main
       displayName: Update GitOps Repository
