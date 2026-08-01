@@ -1,6 +1,9 @@
 trigger:
 - main
 
+pool:
+  vmImage: ubuntu-latest
+
 variables:
 - name: dockerRegistryServiceConnection
   value: '4ca1b796-fefa-4a30-bdb2-151c27da6be6'
@@ -16,9 +19,6 @@ variables:
 
 - name: tag
   value: $(Build.BuildId)
-
-pool:
-  vmImage: ubuntu-latest
 
 steps:
 
