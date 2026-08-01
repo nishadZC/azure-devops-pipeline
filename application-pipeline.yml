@@ -26,13 +26,6 @@ variables:
 - name: vmImageName
   value: 'ubuntu-latest'
 
-- script: |
-    sudo wget https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64 \
-      -O /usr/local/bin/yq
-    sudo chmod +x /usr/local/bin/yq
-    yq --version
-  displayName: Install yq
-
 stages:
 
 - stage: Build
@@ -56,6 +49,13 @@ stages:
     # Checkout Application Repository
     - checkout: self
       persistCredentials: true
+    
+    - script: |
+        sudo wget https://github.com/mikefarah/yq/releases/download/v4.44.3/yq_linux_amd64 \
+          -O /usr/local/bin/yq
+        sudo chmod +x /usr/local/bin/yq
+        yq --version
+      displayName: Install yq
 
 
     # Build and Push Image to ACR
@@ -84,13 +84,14 @@ stages:
 
         rm -rf gitops-repo
 
-        git clone https://$(GITHUB_PAT)@github.com/nishadZC/gitops-repo.git
+        git -c http.extraHeader="Authorization: Bearer $(GITHUB_PAT)" \
+        clone https://github.com/nishadZC/gitops-repo.git
 
         cd gitops-repo/app1
 
         yq -i '
         .spec.template.spec.containers[0].image =
-        "$(containerRegistry)/$(imageRepository):$(Build.SourceVersion)"
+        "$(containerRegistry)/$(imageRepository):$(tag)"
         ' deployment.yml
 
         echo "Updated image:"
@@ -101,8 +102,12 @@ stages:
 
         git add deployment.yml
 
-        git diff --cached --quiet || \
-        git commit -m "Deploy $(Build.SourceVersion)"
+        if git diff --cached --quiet; then
+            echo "No manifest changes."
+        else
+            git commit -m "Deploy $(tag)"
+            git push origin main
+        fi
 
         git push origin main
       displayName: Update GitOps Repository
