@@ -40,7 +40,7 @@ steps:
     echo "Triggering GitOps Pipeline..."
 
     curl -X POST \
-      -u :$(System.AccessToken) \
+      -H "Authorization: Bearer $SYSTEM_ACCESSTOKEN" \
       -H "Content-Type: application/json" \
       -d '{
         "templateParameters": {
@@ -50,5 +50,6 @@ steps:
       https://dev.azure.com/vinayaknishad/azure-devops-pipeline/_apis/pipelines/14/runs?api-version=7.1-preview.1
 
   displayName: Trigger GitOps Pipeline
+
   env:
     SYSTEM_ACCESSTOKEN: $(System.AccessToken)
