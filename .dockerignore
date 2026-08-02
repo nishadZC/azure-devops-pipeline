@@ -1,0 +1,28 @@
+# ── Docker ignore for CommuteShare ───────────────────────────────
+# Keeps Docker build context lean — excludes everything not needed
+# inside the image.
+
+# Git history
+.git/
+.gitignore
+
+# Azure DevOps pipeline definitions (not needed in image)
+.azure/
+
+# Docs
+README.md
+*.md
+
+# OS / editor files
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Old flat files (kept during transition, exclude from build)
+index.html
+style.css
+script.js
+hero-bg.png
+azure-pipelines-ci.yml
+application-pipeline.yml

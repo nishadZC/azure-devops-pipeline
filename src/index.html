@@ -8,7 +8,8 @@
    <meta name="description"
       content="CommuteShare connects daily commuters for affordable, sustainable carpooling. Save money, reduce traffic, and build a commuting community.">
 
-   <link rel="stylesheet" href="style.css">
+   <!-- Stylesheet — updated path -->
+   <link rel="stylesheet" href="assets/css/style.css">
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
    <link
       href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap"
@@ -61,7 +62,7 @@
          <i class="fa-solid fa-leaf"></i> Eco-Friendly
       </div>
       <div class="floating-badge badge-2">
-         <i class="fa-solid fa-shield-halved"></i> Safe & Verified
+         <i class="fa-solid fa-shield-halved"></i> Safe &amp; Verified
       </div>
       <div class="floating-badge badge-3">
          <i class="fa-solid fa-bolt"></i> Instant Match
@@ -137,59 +138,70 @@
 
          <div class="card reveal">
             <div class="card-glow"></div>
-            <div class="card-icon">
-               <i class="fa-solid fa-route"></i>
-            </div>
+            <div class="card-icon"><i class="fa-solid fa-route"></i></div>
             <h3>Daily Route Registration</h3>
-            <p>
-               Drivers register recurring routes, timings, and available seats.
-               Example: Home → Office every weekday at 8:30 AM.
-            </p>
-            <div class="card-arrow">
-               <i class="fa-solid fa-arrow-right"></i>
+            <p>Drivers &amp; riders set up their commute once and repeat it every day.</p>
+            <ul class="card-bullets">
+               <li><i class="fa-solid fa-circle-dot"></i> Set recurring routes</li>
+               <li><i class="fa-solid fa-circle-dot"></i> Add departure timings</li>
+               <li><i class="fa-solid fa-circle-dot"></i> Define available seats</li>
+            </ul>
+            <div class="card-example">
+               <i class="fa-solid fa-location-arrow"></i>
+               Home → Office · Weekdays · 8:30 AM
             </div>
+            <div class="card-arrow"><i class="fa-solid fa-arrow-right"></i></div>
          </div>
 
          <div class="card reveal">
             <div class="card-glow"></div>
-            <div class="card-icon">
-               <i class="fa-solid fa-users"></i>
+            <div class="card-icon"><i class="fa-solid fa-users"></i></div>
+            <h3>Ride Matching System</h3>
+            <p>Find commuters already traveling your path and book in seconds.</p>
+            <ul class="card-bullets">
+               <li><i class="fa-solid fa-circle-dot"></i> Search nearby matching routes</li>
+               <li><i class="fa-solid fa-circle-dot"></i> Join rides going same direction</li>
+               <li><i class="fa-solid fa-circle-dot"></i> Book instantly — no waiting</li>
+            </ul>
+            <div class="card-example">
+               <i class="fa-solid fa-bolt"></i>
+               AI-powered · Real-time · One tap
             </div>
-            <h3>Smart Ride Matching</h3>
-            <p>
-               AI-powered matching finds nearby commuters traveling the same direction — book instantly with one tap.
-            </p>
-            <div class="card-arrow">
-               <i class="fa-solid fa-arrow-right"></i>
-            </div>
+            <div class="card-arrow"><i class="fa-solid fa-arrow-right"></i></div>
          </div>
 
          <div class="card reveal">
             <div class="card-glow"></div>
-            <div class="card-icon">
-               <i class="fa-solid fa-calendar-check"></i>
+            <div class="card-icon"><i class="fa-solid fa-calendar-check"></i></div>
+            <h3>Monthly Subscription Model</h3>
+            <p>Subscribe once, ride all month — perfect for daily commuters.</p>
+            <ul class="card-bullets">
+               <li><i class="fa-solid fa-circle-dot"></i> Fixed routes, no daily booking hassle</li>
+               <li><i class="fa-solid fa-circle-dot"></i> Drivers get stable recurring income</li>
+               <li><i class="fa-solid fa-circle-dot"></i> Riders pay less than daily rates</li>
+            </ul>
+            <div class="card-example">
+               <i class="fa-solid fa-tag"></i>
+               Office commute subscription · ₹1,500/month
             </div>
-            <h3>Monthly Subscription</h3>
-            <p>
-               Subscribe to fixed routes for daily office or college travel at affordable monthly pricing.
-            </p>
-            <div class="card-arrow">
-               <i class="fa-solid fa-arrow-right"></i>
-            </div>
+            <div class="card-arrow"><i class="fa-solid fa-arrow-right"></i></div>
          </div>
 
          <div class="card reveal">
             <div class="card-glow"></div>
-            <div class="card-icon">
-               <i class="fa-solid fa-wallet"></i>
+            <div class="card-icon"><i class="fa-solid fa-wallet"></i></div>
+            <h3>Significant Cost Reduction</h3>
+            <p>Riders save big because drivers aren't making a special trip for them.</p>
+            <ul class="card-bullets">
+               <li><i class="fa-solid fa-circle-dot"></i> Driver already travels that route</li>
+               <li><i class="fa-solid fa-circle-dot"></i> No special detour required</li>
+               <li><i class="fa-solid fa-circle-dot"></i> Platform commission stays minimal</li>
+            </ul>
+            <div class="card-example">
+               <i class="fa-solid fa-arrow-trend-down"></i>
+               Prices far lower than Uber &amp; Rapido
             </div>
-            <h3>Ultra Low Cost</h3>
-            <p>
-               Drivers already travel that route — reducing platform costs and making rides dramatically cheaper.
-            </p>
-            <div class="card-arrow">
-               <i class="fa-solid fa-arrow-right"></i>
-            </div>
+            <div class="card-arrow"><i class="fa-solid fa-arrow-right"></i></div>
          </div>
 
       </div>
@@ -209,41 +221,35 @@
       <div class="business-grid">
 
          <div class="business-card reveal">
-            <div class="biz-icon">
-               <i class="fa-solid fa-chart-line"></i>
-            </div>
+            <div class="biz-icon"><i class="fa-solid fa-chart-line"></i></div>
             <h3>Revenue Streams</h3>
             <ul>
-               <li><i class="fa-solid fa-check"></i> Small commission per ride</li>
-               <li><i class="fa-solid fa-check"></i> Monthly subscriptions</li>
-               <li><i class="fa-solid fa-check"></i> Premium verified commuters</li>
-               <li><i class="fa-solid fa-check"></i> Corporate partnerships</li>
+               <li><i class="fa-solid fa-check"></i> Small commission per ride / subscription</li>
+               <li><i class="fa-solid fa-check"></i> Premium verified commuter plans</li>
+               <li><i class="fa-solid fa-check"></i> Corporate &amp; college commute partnerships</li>
+               <li><i class="fa-solid fa-check"></i> Subscription-based commute packages</li>
             </ul>
          </div>
 
          <div class="business-card reveal">
-            <div class="biz-icon">
-               <i class="fa-solid fa-bullseye"></i>
-            </div>
+            <div class="biz-icon"><i class="fa-solid fa-bullseye"></i></div>
             <h3>Target Audience</h3>
             <ul>
-               <li><i class="fa-solid fa-check"></i> Office Employees</li>
-               <li><i class="fa-solid fa-check"></i> College Students</li>
-               <li><i class="fa-solid fa-check"></i> Daily Commuters</li>
-               <li><i class="fa-solid fa-check"></i> Corporate Campuses & Tech Parks</li>
+               <li><i class="fa-solid fa-check"></i> Office employees</li>
+               <li><i class="fa-solid fa-check"></i> College &amp; university students</li>
+               <li><i class="fa-solid fa-check"></i> Daily urban commuters</li>
+               <li><i class="fa-solid fa-check"></i> Tech parks &amp; corporate campuses</li>
             </ul>
          </div>
 
          <div class="business-card revenue-highlight reveal">
-            <div class="biz-icon">
-               <i class="fa-solid fa-trophy"></i>
-            </div>
+            <div class="biz-icon"><i class="fa-solid fa-trophy"></i></div>
             <h3>Why We Win</h3>
             <ul>
-               <li><i class="fa-solid fa-check"></i> No extra vehicles needed</li>
-               <li><i class="fa-solid fa-check"></i> Lower ops cost than Uber/Ola</li>
-               <li><i class="fa-solid fa-check"></i> Built-in repeat customers</li>
-               <li><i class="fa-solid fa-check"></i> Network effect grows value</li>
+               <li><i class="fa-solid fa-check"></i> No extra vehicles or special trips needed</li>
+               <li><i class="fa-solid fa-check"></i> Far lower ops cost than Uber / Ola / Rapido</li>
+               <li><i class="fa-solid fa-check"></i> Built-in repeat daily customers</li>
+               <li><i class="fa-solid fa-check"></i> Network effect multiplies route coverage</li>
             </ul>
          </div>
 
@@ -266,36 +272,36 @@
          <div class="future-card reveal">
             <div class="future-num">01</div>
             <div class="future-emoji">🤖</div>
-            <h3>AI Smart Route Matching</h3>
-            <p>Machine learning that predicts the best match based on habits and preferences.</p>
+            <h3>AI-Based Smart Route Matching</h3>
+            <p>ML-powered engine predicts the best commute match based on travel habits, timings, and preferences.</p>
          </div>
 
          <div class="future-card reveal">
             <div class="future-num">02</div>
             <div class="future-emoji">👩</div>
-            <h3>Women-Only Rides</h3>
-            <p>A dedicated safe commute option with verified female drivers and riders.</p>
+            <h3>Women-Only Ride Options</h3>
+            <p>A dedicated, verified safe commute option exclusively for female drivers and riders.</p>
          </div>
 
          <div class="future-card reveal">
             <div class="future-num">03</div>
             <div class="future-emoji">📍</div>
-            <h3>Live Tracking</h3>
-            <p>Real-time GPS tracking shared with family and emergency contacts.</p>
+            <h3>Live Tracking &amp; Safety Verification</h3>
+            <p>Real-time GPS tracking with live route sharing for family members and trusted contacts.</p>
          </div>
 
          <div class="future-card reveal">
             <div class="future-num">04</div>
             <div class="future-emoji">🚨</div>
-            <h3>Emergency Contacts</h3>
-            <p>One-tap SOS with location shared to your emergency contact list instantly.</p>
+            <h3>Emergency Contact System</h3>
+            <p>One-tap SOS that instantly shares your live location with your pre-set emergency contacts.</p>
          </div>
 
          <div class="future-card reveal">
             <div class="future-num">05</div>
             <div class="future-emoji">🎁</div>
-            <h3>Rewards Program</h3>
-            <p>Earn points for every ride shared and redeem for free trips and perks.</p>
+            <h3>Rewards for Regular Commuters</h3>
+            <p>Earn points on every shared ride and redeem them for free trips, discounts, and exclusive perks.</p>
          </div>
 
       </div>
@@ -309,14 +315,24 @@
          <div class="pitch-glow"></div>
          <div class="section-tag center-tag">✦ Our Vision</div>
          <h2>Why This Idea <span class="yellow-text">Stands Out</span></h2>
-         <p>
-            This is more than a taxi booking app. It's a movement.
-            CommuteShare combines
-            <span class="pill">Carpooling</span>,
-            <span class="pill">Subscription Commuting</span>, and
-            <span class="pill">Community Transportation</span>
-            into one affordable, sustainable mobility platform.
+
+         <blockquote class="pitch-quote">
+            &ldquo;A smart ride-sharing platform where daily commuters share their existing travel routes with others going the same way. Instead of booking dedicated rides like Uber or Rapido, users join rides already heading that direction — cutting costs significantly. The platform also supports monthly commute subscriptions for regular travelers.&rdquo;
+         </blockquote>
+
+         <p>This is not just another taxi app. CommuteShare is a
+            <span class="pill">Shared Mobility Ecosystem</span> —
+            a <span class="pill">Low-Cost Daily Commute Solution</span> —
+            a <span class="pill">Sustainable Transport Model</span>.
          </p>
+
+         <p class="pitch-combo">A powerful mix of
+            <strong class="yellow-text">Carpooling</strong>,
+            <strong class="yellow-text">Subscription Commuting</strong>, and
+            <strong class="yellow-text">Community Transport</strong>
+            — all in one platform.
+         </p>
+
          <a href="#features" class="btn-primary pitch-btn">
             <i class="fa-solid fa-rocket"></i> Start Your Journey
          </a>
@@ -361,7 +377,8 @@
       </div>
    </footer>
 
-   <script src="script.js"></script>
+   <!-- Script — updated path -->
+   <script src="assets/js/script.js"></script>
 
 </body>
 
