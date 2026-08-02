@@ -4,95 +4,192 @@
 <head>
    <meta charset="UTF-8">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <title>CommuteShare</title>
+   <title>CommuteShare — Smart Daily Ride Sharing</title>
+   <meta name="description"
+      content="CommuteShare connects daily commuters for affordable, sustainable carpooling. Save money, reduce traffic, and build a commuting community.">
 
    <link rel="stylesheet" href="style.css">
-
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+   <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+      rel="stylesheet">
 </head>
 
 <body>
 
-   <nav>
+   <!-- Particle Canvas -->
+   <canvas id="particleCanvas"></canvas>
+
+   <!-- Navigation -->
+   <nav id="navbar">
       <div class="logo">
-         🚗 CommuteShare
+         <div class="logo-icon">
+            <i class="fa-solid fa-car-side"></i>
+         </div>
+         <span>Commute<span class="logo-highlight">Share</span></span>
       </div>
 
-      <ul>
-         <li><a href="#features">Features</a></li>
-         <li><a href="#business">Business</a></li>
-         <li><a href="#future">Future</a></li>
-         <li><a href="#contact">Contact</a></li>
+      <ul class="nav-links">
+         <li><a href="#features" class="nav-link">Features</a></li>
+         <li><a href="#business" class="nav-link">Business</a></li>
+         <li><a href="#future" class="nav-link">Future</a></li>
+         <li><a href="#contact" class="nav-link">Contact</a></li>
       </ul>
+
+      <a href="#features" class="nav-cta" id="navCta">Get Started</a>
+
+      <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+         <span></span><span></span><span></span>
+      </button>
    </nav>
 
-   <header>
+   <!-- Mobile Menu -->
+   <div class="mobile-menu" id="mobileMenu">
+      <a href="#features" class="mobile-link">Features</a>
+      <a href="#business" class="mobile-link">Business</a>
+      <a href="#future" class="mobile-link">Future</a>
+      <a href="#contact" class="mobile-link">Contact</a>
+   </div>
 
-      <div class="hero-text">
-         <h1>Smart Daily Ride Sharing</h1>
+   <!-- Hero Section -->
+   <header id="hero">
+      <div class="hero-bg-image"></div>
+      <div class="hero-overlay"></div>
 
-         <p>
-            Share your existing commute with others traveling the same route.
-            Save money, reduce traffic, and build a sustainable commuting community.
-         </p>
-
-         <button id="learnBtn">Explore Features</button>
+      <!-- Floating animated badges -->
+      <div class="floating-badge badge-1">
+         <i class="fa-solid fa-leaf"></i> Eco-Friendly
+      </div>
+      <div class="floating-badge badge-2">
+         <i class="fa-solid fa-shield-halved"></i> Safe & Verified
+      </div>
+      <div class="floating-badge badge-3">
+         <i class="fa-solid fa-bolt"></i> Instant Match
       </div>
 
+      <div class="hero-content">
+         <div class="hero-tag">
+            <span class="tag-dot"></span>
+            <span>Trusted by 50,000+ commuters</span>
+         </div>
+
+         <h1 class="hero-title">
+            Smart Daily
+            <span class="typed-wrapper">
+               <span id="typedText" class="highlight-text"></span>
+               <span class="cursor">|</span>
+            </span>
+            <br>Ride Sharing
+         </h1>
+
+         <p class="hero-subtitle">
+            Share your existing commute with others on the same route.
+            Save up to <strong class="yellow-text">70% on travel costs</strong>, reduce traffic,
+            and build a sustainable community.
+         </p>
+
+         <div class="hero-actions">
+            <button id="learnBtn" class="btn-primary">
+               <i class="fa-solid fa-rocket"></i>
+               Explore Features
+            </button>
+            <a href="#business" class="btn-ghost">
+               <i class="fa-solid fa-play"></i>
+               How it Works
+            </a>
+         </div>
+
+         <div class="hero-stats">
+            <div class="stat">
+               <span class="stat-number" data-target="50">0</span><span class="stat-suffix">K+</span>
+               <span class="stat-label">Active Riders</span>
+            </div>
+            <div class="stat-divider"></div>
+            <div class="stat">
+               <span class="stat-number" data-target="70">0</span><span class="stat-suffix">%</span>
+               <span class="stat-label">Cost Savings</span>
+            </div>
+            <div class="stat-divider"></div>
+            <div class="stat">
+               <span class="stat-number" data-target="200">0</span><span class="stat-suffix">+</span>
+               <span class="stat-label">Routes Daily</span>
+            </div>
+         </div>
+      </div>
+
+      <div class="scroll-indicator">
+         <div class="scroll-line"></div>
+         <span>Scroll Down</span>
+      </div>
    </header>
 
 
+   <!-- Features Section -->
    <section id="features">
 
-      <h2>Key Features</h2>
+      <div class="section-header reveal">
+         <div class="section-tag">✦ What We Offer</div>
+         <h2>Key <span class="yellow-text">Features</span></h2>
+         <p class="section-sub">Everything you need for a seamless daily commute experience</p>
+      </div>
 
       <div class="cards">
 
-         <div class="card">
-            <i class="fa-solid fa-route"></i>
+         <div class="card reveal">
+            <div class="card-glow"></div>
+            <div class="card-icon">
+               <i class="fa-solid fa-route"></i>
+            </div>
             <h3>Daily Route Registration</h3>
-
             <p>
-               Drivers can register recurring routes, timings, and available seats.
+               Drivers register recurring routes, timings, and available seats.
                Example: Home → Office every weekday at 8:30 AM.
             </p>
-
+            <div class="card-arrow">
+               <i class="fa-solid fa-arrow-right"></i>
+            </div>
          </div>
 
-         <div class="card">
-
-            <i class="fa-solid fa-users"></i>
-
-            <h3>Ride Matching</h3>
-
+         <div class="card reveal">
+            <div class="card-glow"></div>
+            <div class="card-icon">
+               <i class="fa-solid fa-users"></i>
+            </div>
+            <h3>Smart Ride Matching</h3>
             <p>
-               Find nearby commuters traveling the same direction and book instantly.
+               AI-powered matching finds nearby commuters traveling the same direction — book instantly with one tap.
             </p>
-
+            <div class="card-arrow">
+               <i class="fa-solid fa-arrow-right"></i>
+            </div>
          </div>
 
-         <div class="card">
-
-            <i class="fa-solid fa-calendar-check"></i>
-
+         <div class="card reveal">
+            <div class="card-glow"></div>
+            <div class="card-icon">
+               <i class="fa-solid fa-calendar-check"></i>
+            </div>
             <h3>Monthly Subscription</h3>
-
             <p>
                Subscribe to fixed routes for daily office or college travel at affordable monthly pricing.
             </p>
-
+            <div class="card-arrow">
+               <i class="fa-solid fa-arrow-right"></i>
+            </div>
          </div>
 
-         <div class="card">
-
-            <i class="fa-solid fa-wallet"></i>
-
-            <h3>Low Cost</h3>
-
+         <div class="card reveal">
+            <div class="card-glow"></div>
+            <div class="card-icon">
+               <i class="fa-solid fa-wallet"></i>
+            </div>
+            <h3>Ultra Low Cost</h3>
             <p>
-               Drivers already travel that route, reducing platform costs and making rides cheaper.
+               Drivers already travel that route — reducing platform costs and making rides dramatically cheaper.
             </p>
-
+            <div class="card-arrow">
+               <i class="fa-solid fa-arrow-right"></i>
+            </div>
          </div>
 
       </div>
@@ -100,36 +197,54 @@
    </section>
 
 
-   <section id="business">
+   <!-- Business Model Section -->
+   <section id="business" class="business-section">
 
-      <h2>Business Model</h2>
+      <div class="section-header reveal">
+         <div class="section-tag">✦ The Blueprint</div>
+         <h2>Business <span class="yellow-text">Model</span></h2>
+         <p class="section-sub">A sustainable revenue model designed for growth</p>
+      </div>
 
       <div class="business-grid">
 
-         <div>
-            <h3>Revenue</h3>
-
+         <div class="business-card reveal">
+            <div class="biz-icon">
+               <i class="fa-solid fa-chart-line"></i>
+            </div>
+            <h3>Revenue Streams</h3>
             <ul>
-               <li>Small commission per ride</li>
-               <li>Monthly subscriptions</li>
-               <li>Premium verified commuters</li>
-               <li>Corporate partnerships</li>
+               <li><i class="fa-solid fa-check"></i> Small commission per ride</li>
+               <li><i class="fa-solid fa-check"></i> Monthly subscriptions</li>
+               <li><i class="fa-solid fa-check"></i> Premium verified commuters</li>
+               <li><i class="fa-solid fa-check"></i> Corporate partnerships</li>
             </ul>
-
          </div>
 
-         <div>
-
+         <div class="business-card reveal">
+            <div class="biz-icon">
+               <i class="fa-solid fa-bullseye"></i>
+            </div>
             <h3>Target Audience</h3>
-
             <ul>
-               <li>Office Employees</li>
-               <li>College Students</li>
-               <li>Daily Commuters</li>
-               <li>Corporate Campuses</li>
-               <li>Tech Parks</li>
+               <li><i class="fa-solid fa-check"></i> Office Employees</li>
+               <li><i class="fa-solid fa-check"></i> College Students</li>
+               <li><i class="fa-solid fa-check"></i> Daily Commuters</li>
+               <li><i class="fa-solid fa-check"></i> Corporate Campuses & Tech Parks</li>
             </ul>
+         </div>
 
+         <div class="business-card revenue-highlight reveal">
+            <div class="biz-icon">
+               <i class="fa-solid fa-trophy"></i>
+            </div>
+            <h3>Why We Win</h3>
+            <ul>
+               <li><i class="fa-solid fa-check"></i> No extra vehicles needed</li>
+               <li><i class="fa-solid fa-check"></i> Lower ops cost than Uber/Ola</li>
+               <li><i class="fa-solid fa-check"></i> Built-in repeat customers</li>
+               <li><i class="fa-solid fa-check"></i> Network effect grows value</li>
+            </ul>
          </div>
 
       </div>
@@ -137,56 +252,113 @@
    </section>
 
 
+   <!-- Future Features Section -->
    <section id="future">
 
-      <h2>Future Features</h2>
+      <div class="section-header reveal">
+         <div class="section-tag">✦ What's Coming</div>
+         <h2>Future <span class="yellow-text">Features</span></h2>
+         <p class="section-sub">We're building the future of urban mobility</p>
+      </div>
 
-      <div class="future">
+      <div class="future-grid">
 
-         <div>🤖 AI Smart Route Matching</div>
+         <div class="future-card reveal">
+            <div class="future-num">01</div>
+            <div class="future-emoji">🤖</div>
+            <h3>AI Smart Route Matching</h3>
+            <p>Machine learning that predicts the best match based on habits and preferences.</p>
+         </div>
 
-         <div>👩 Women-only Rides</div>
+         <div class="future-card reveal">
+            <div class="future-num">02</div>
+            <div class="future-emoji">👩</div>
+            <h3>Women-Only Rides</h3>
+            <p>A dedicated safe commute option with verified female drivers and riders.</p>
+         </div>
 
-         <div>📍 Live Tracking</div>
+         <div class="future-card reveal">
+            <div class="future-num">03</div>
+            <div class="future-emoji">📍</div>
+            <h3>Live Tracking</h3>
+            <p>Real-time GPS tracking shared with family and emergency contacts.</p>
+         </div>
 
-         <div>🚨 Emergency Contacts</div>
+         <div class="future-card reveal">
+            <div class="future-num">04</div>
+            <div class="future-emoji">🚨</div>
+            <h3>Emergency Contacts</h3>
+            <p>One-tap SOS with location shared to your emergency contact list instantly.</p>
+         </div>
 
-         <div>🎁 Rewards Program</div>
+         <div class="future-card reveal">
+            <div class="future-num">05</div>
+            <div class="future-emoji">🎁</div>
+            <h3>Rewards Program</h3>
+            <p>Earn points for every ride shared and redeem for free trips and perks.</p>
+         </div>
 
       </div>
 
    </section>
 
 
-   <section class="pitch">
-
-      <h2>Why This Idea Stands Out</h2>
-
-      <p>
-
-         This is more than a taxi booking application.
-
-         It combines:
-
-         <strong>Carpooling</strong>,
-         <strong>Subscription Commuting</strong>,
-         <strong>Community Transportation</strong>
-
-         into one affordable mobility platform.
-
-      </p>
-
+   <!-- Pitch Section -->
+   <section class="pitch reveal">
+      <div class="pitch-inner">
+         <div class="pitch-glow"></div>
+         <div class="section-tag center-tag">✦ Our Vision</div>
+         <h2>Why This Idea <span class="yellow-text">Stands Out</span></h2>
+         <p>
+            This is more than a taxi booking app. It's a movement.
+            CommuteShare combines
+            <span class="pill">Carpooling</span>,
+            <span class="pill">Subscription Commuting</span>, and
+            <span class="pill">Community Transportation</span>
+            into one affordable, sustainable mobility platform.
+         </p>
+         <a href="#features" class="btn-primary pitch-btn">
+            <i class="fa-solid fa-rocket"></i> Start Your Journey
+         </a>
+      </div>
    </section>
 
 
+   <!-- Footer -->
    <footer id="contact">
+      <div class="footer-inner">
 
-      <h3>CommuteShare</h3>
+         <div class="footer-brand">
+            <div class="logo footer-logo">
+               <div class="logo-icon">
+                  <i class="fa-solid fa-car-side"></i>
+               </div>
+               <span>Commute<span class="logo-highlight">Share</span></span>
+            </div>
+            <p>Smart • Affordable • Sustainable</p>
+         </div>
 
-      <p>Smart • Affordable • Sustainable</p>
+         <div class="footer-links">
+            <h4>Quick Links</h4>
+            <a href="#features">Features</a>
+            <a href="#business">Business Model</a>
+            <a href="#future">Future</a>
+         </div>
 
-      <p>© 2026 All Rights Reserved</p>
+         <div class="footer-social">
+            <h4>Connect</h4>
+            <div class="social-icons">
+               <a href="#" class="social-icon" aria-label="Twitter"><i class="fa-brands fa-x-twitter"></i></a>
+               <a href="#" class="social-icon" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+               <a href="#" class="social-icon" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+            </div>
+         </div>
 
+      </div>
+
+      <div class="footer-bottom">
+         <p>© 2026 CommuteShare. All Rights Reserved. Built with <span class="yellow-text">♥</span> for commuters.</p>
+      </div>
    </footer>
 
    <script src="script.js"></script>
